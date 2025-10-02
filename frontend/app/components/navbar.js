@@ -27,12 +27,6 @@ export default function Navbar() {
         Sleep Health Admission Predictor
       </Link>
       <div className="flex items-center space-x-4">
-        <Link href="#features" className="text-gray-700 dark:text-gray-300 hover:text-blue-600">
-          Fitur
-        </Link>
-        <Link href="#about" className="text-gray-700 dark:text-gray-300 hover:text-blue-600">
-          Tentang
-        </Link>
         <Link href="/predict" className="text-gray-700 dark:text-gray-300 hover:text-blue-600">
           Prediksi
         </Link>

@@ -15,17 +15,17 @@ import {
 } from "@/components/ui/select";
 import { motion } from "framer-motion";
 
-// Validasi schema pakai Zod
+// Validasi pake Zod
 const schema = z.object({
   usia: z.coerce.number().min(0).max(120),
   durasi_tidur: z.coerce.number().min(0).max(24),
   kualitas_tidur: z.coerce.number().min(0).max(10),
   level_aktivitas_fisik: z.coerce.number().min(0).max(100),
   level_stres: z.coerce.number().min(0).max(10),
-  denyut_jantung: z.coerce.number().min(0),
-  langkah_harian: z.coerce.number().min(0),
-  sistolik: z.coerce.number().min(0),
-  diastolik: z.coerce.number().min(0),
+  denyut_jantung: z.coerce.number().min(0).max(250),
+  langkah_harian: z.coerce.number().min(0).max(100000),
+  sistolik: z.coerce.number().min(50).max(250),
+  diastolik: z.coerce.number().min(30).max(150),
   jenis_kelamin: z.string(),
   pekerjaan: z.string(),
   kategori_bmi: z.string(),
@@ -78,7 +78,6 @@ export default function PredictPage() {
 
 <section className="relative flex flex-col items-center justify-center text-center px-6 py-24 bg-white/70 dark:bg-black/70 overflow-hidden">
 
-        {/* Judul */}
         <motion.h1
           initial={{ opacity: 0, y: -40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -89,7 +88,6 @@ export default function PredictPage() {
           Formulir Prediksi Gangguan Tidur
         </motion.h1>
 
-        {/* Form */}
         <div className="w-full max-w-5xl mx-auto z-10">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10">
@@ -111,7 +109,6 @@ export default function PredictPage() {
                   />
                 ))}
 
-                {/* Selects */}
                 <FormField
                   control={form.control}
                   name="jenis_kelamin"

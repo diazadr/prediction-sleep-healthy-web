@@ -18,13 +18,14 @@ label_map = {
 
 load_dotenv()
 
-# --- API Key Config ---
+# API Key
 API_KEY = os.getenv("API_KEY", "")
 API_KEY_NAME = "X-API-Key"
 
-def verify_api_key(x_api_key: str = Header(...)):
+def verify_api_key(x_api_key: str = Header(..., alias="X-API-Key")):
     if x_api_key != API_KEY:
         raise HTTPException(status_code=401, detail="Invalid or missing API Key")
+
 
 try:
     model = joblib.load(MODEL_PATH)
@@ -32,7 +33,7 @@ except Exception as e:
     raise RuntimeError(f"Gagal load model dari {MODEL_PATH}: {e}")
 
 
-# Endpoint
+# Endpointnya
 @router.post("/predict", response_model=PredictionResult, dependencies=[Depends(verify_api_key)])
 def predict(input: SleepInput):
     try:

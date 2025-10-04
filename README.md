@@ -2,29 +2,30 @@
 
 ![Project Status](https://img.shields.io/badge/status-completed-brightgreen) [![License](https://img.shields.io/badge/license-MIT-blue)](./LICENSE)
 
-This project is a **machine learning-powered web application** that predicts potential sleep disorders based on lifestyle and health data. The system integrates a **Next.js frontend** with a **FastAPI backend** to provide an interactive, real-time prediction service.
+A **machine learning-powered web application** that predicts potential sleep disorders based on lifestyle and health data. The platform integrates a **Next.js frontend** with a **FastAPI backend** to deliver real-time predictions.
 
 ---
 
 ## Dataset
 
-Dataset used: [Sleep Health and Lifestyle Dataset](https://www.kaggle.com/datasets/uom190346a/sleep-health-and-lifestyle-dataset) from Kaggle. It contains lifestyle and health indicators that influence sleep quality, used to train and evaluate the prediction model.
+* **Source**: [Sleep Health and Lifestyle Dataset](https://www.kaggle.com/datasets/uom190346a/sleep-health-and-lifestyle-dataset) from Kaggle.
+* **Description**: Contains lifestyle and health indicators influencing sleep quality, used for training and evaluating the ML model.
 
 ---
 
 ## Technologies Used
 
-* **Python 3.11**: Backend logic and ML model integration.
+* **Python 3.11**: Backend logic and ML integration.
 * **FastAPI**: High-performance backend API framework.
-* **Pydantic**: Data validation and schema management.
-* **Joblib**: Model serialization and loading.
-* **scikit-learn / LightGBM**: Machine learning models.
-* **Next.js (React)**: Frontend framework for building a modern UI.
-* **React Three Fiber**: For 3D and visual rendering.
-* **shadcn/ui**: Prebuilt UI components with customization support.
-* **TailwindCSS**: Utility-first CSS framework for styling.
-* **Framer Motion**: Animation library for smooth and interactive UI transitions.
-* **Zod**: Type-safe schema validation on the frontend.
+* **Pydantic**: Data validation & schema management.
+* **Joblib**: Model serialization/loading.
+* **scikit-learn / LightGBM**: ML models.
+* **Next.js (React)**: Frontend framework.
+* **React Three Fiber**: 3D & visual rendering.
+* **shadcn/ui**: Prebuilt UI components.
+* **TailwindCSS**: Utility-first CSS styling.
+* **Framer Motion**: Smooth animations.
+* **Zod**: Frontend schema validation.
 
 ---
 
@@ -32,34 +33,47 @@ Dataset used: [Sleep Health and Lifestyle Dataset](https://www.kaggle.com/datase
 
 ### Frontend
 
-* **User-Friendly Form UI**: Clean and responsive design with shadcn/ui and TailwindCSS.
-* **Form Validation**: Using Zod with React Hook Form.
-* **Interactive Animations**: Powered by Framer Motion.
-* **3D Visuals & Effects**: Implemented with React Three Fiber.
-* **Dark Mode Support**: via next-themes.
+* **User-Friendly Form UI** with responsive design.
+* **Form Validation** using Zod + React Hook Form.
+* **Interactive Animations** via Framer Motion.
+* **3D Visuals & Effects** using React Three Fiber.
+* **Dark Mode Support** with next-themes.
 
 ### Backend
 
-* **REST API**: Built with FastAPI.
-* **Form Validation**: Using Pydantic for input schemas.
-* **Secure API**: API key authentication support.
-* **Environment Management**: Handled with python-dotenv.
+* **REST API** built with FastAPI.
+* **Form Validation** via Pydantic schemas.
+* **Secure API** with API key authentication.
+* **Environment Management** using python-dotenv.
 
 ### Machine Learning Model
 
-* **Preprocessing**: Data handling with Pandas & Scikit-learn.
-* **Prediction**: Sleep disorder classification (None, Insomnia, Sleep Apnea).
-* **Model Deployment**: Serialized with Joblib, served via FastAPI.
+* **Preprocessing** with Pandas & Scikit-learn.
+* **Prediction**: Classifies sleep disorder as *None*, *Insomnia*, or *Sleep Apnea*.
+* **Deployment**: Model serialized with Joblib, served via FastAPI.
 
 ---
 
 ## Demo
 
-* **Landing Page**
-* **Prediction Form**
-* **Prediction Result**
+### Landing Page
 
-(Screenshots to be added)
+<img src="https://github.com/user-attachments/assets/0b967e66-051b-47c7-8cc3-a5437751d9b8" width="600">
+<img src="https://github.com/user-attachments/assets/43cd2f06-5710-4245-bbc1-1b12879f6d0e" width="600">
+
+### Prediction Form
+
+<img src="https://github.com/user-attachments/assets/4c2715e6-5633-43c3-b9f6-c0304bf70b33" width="600">
+
+### Prediction Result
+
+<img src="https://github.com/user-attachments/assets/e8233472-5aaa-4a7a-8688-507bdc7d1dc6" width="600">
+<img src="https://github.com/user-attachments/assets/62d654c2-9f22-4902-bdd4-cf94a467e82a" width="600">
+<img src="https://github.com/user-attachments/assets/0de499c3-7137-4dc4-8c91-c7eb33756070" width="600">
+
+### Open API Swagger UI
+
+<img src="https://github.com/user-attachments/assets/56ad4ad0-b9c9-4bce-a48b-4ec2d60edd25" width="600">
 
 ---
 
@@ -67,67 +81,36 @@ Dataset used: [Sleep Health and Lifestyle Dataset](https://www.kaggle.com/datase
 
 ### Backend (FastAPI)
 
-1. Clone the repository:
+```bash
+git clone <repository_url>
+cd backend
+python -m venv venv
+source venv/bin/activate   # Mac/Linux
+venv\Scripts\activate      # Windows
+pip install -r requirements.txt
+uvicorn app.main:app --reload
+```
 
-   ```bash
-   git clone <repository_url>
-   cd backend
-   ```
-
-2. Create virtual environment:
-
-   ```bash
-   python -m venv venv
-   source venv/bin/activate   # Mac/Linux
-   venv\Scripts\activate      # Windows
-   ```
-
-3. Install dependencies:
-
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. Run FastAPI server:
-
-   ```bash
-   uvicorn app.main:app --reload
-   ```
-
-   API runs on `http://127.0.0.1:8000`
+API runs on: `http://127.0.0.1:8000`
 
 ### Frontend (Next.js)
 
-1. Navigate to frontend folder:
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
-   ```bash
-   cd frontend
-   ```
-
-2. Install dependencies:
-
-   ```bash
-   npm install
-   ```
-
-3. Run development server:
-
-   ```bash
-   npm run dev
-   ```
-
-   App runs on `http://localhost:3000`
+App runs on: `http://localhost:3000`
 
 ---
 
-### Testing (pytest)
+## Testing (pytest)
 
-1. Navigate to backend folder:
-
-   ```bash
-   cd backend
-   pytest
-   ```
+```bash
+cd backend
+pytest
+```
 
 ---
 
@@ -137,31 +120,28 @@ Dataset used: [Sleep Health and Lifestyle Dataset](https://www.kaggle.com/datase
 
 ```bash
 cd backend
-# Build the image
 docker build -t project-ml-backend .
-
-# Run the container
 docker run -d -p 8000:8000 --name project-ml-backend project-ml-backend
 ```
 
-Backend will be accessible at `http://localhost:8000`.
+Backend accessible at: `http://localhost:8000`
 
 ---
 
 ## Project Status
 
-This project is **completed** and may be updated with new features and improvements.
+✅ Completed — may receive new updates and improvements.
 
 ---
 
 ## Contributions
 
-Contributions are welcome! Feel free to fork the repository, submit issues, or open pull requests.
+Contributions are welcome! Fork, submit issues, or open pull requests.
 
-Thanks to **Bayu Putra Pamungkas** for support with the model.
+Special thanks to **Bayu Putra Pamungkas** for model support.
 
 ---
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+Licensed under the **MIT License**. See [LICENSE](LICENSE) for details.

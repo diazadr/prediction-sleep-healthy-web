@@ -6,16 +6,36 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
-  Form, FormField, FormItem, FormLabel, FormControl, FormMessage,
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
-  Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from "@/components/ui/select";
 import { motion } from "framer-motion";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+  CartesianGrid,
+  PieChart,
+  Pie,
+  Cell,
+} from "recharts";
 
-// Validasi pake Zod
 const schema = z.object({
   usia: z.coerce.number().min(0).max(120),
   durasi_tidur: z.coerce.number().min(0).max(24),
@@ -37,6 +57,20 @@ export default function PredictPage() {
 
   const form = useForm({
     resolver: zodResolver(schema),
+    defaultValues: {
+      usia: "",
+      durasi_tidur: "",
+      kualitas_tidur: "",
+      level_aktivitas_fisik: "",
+      level_stres: "",
+      denyut_jantung: "",
+      langkah_harian: "",
+      sistolik: "",
+      diastolik: "",
+      jenis_kelamin: "",
+      pekerjaan: "",
+      kategori_bmi: "",
+    },
   });
 
   const onSubmit = async (values) => {
@@ -44,13 +78,13 @@ export default function PredictPage() {
     setResult(null);
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/predict`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-API-Key": process.env.NEXT_PUBLIC_API_KEY,
-      },
-      body: JSON.stringify(values),
-    });
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-API-Key": process.env.NEXT_PUBLIC_API_KEY,
+        },
+        body: JSON.stringify(values),
+      });
       const data = await res.json();
       setResult(data);
     } catch {
@@ -58,6 +92,14 @@ export default function PredictPage() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const explanations = {
+    None: " Tidak terdeteksi gangguan tidur. Pertahankan pola tidur sehat dan gaya hidup seimbang.",
+    "Sleep Apnea":
+      " Terindikasi sleep apnea. Disarankan konsultasi ke tenaga medis untuk pemeriksaan lebih lanjut.",
+    Insomnia:
+      " Terindikasi insomnia. Perbaiki pola tidur, kurangi stres, dan bila berlanjut sebaiknya berkonsultasi dengan dokter.",
   };
 
   const numericFields = [
@@ -73,18 +115,14 @@ export default function PredictPage() {
   ];
 
   return (
-<main className="min-h-screen bg-transparent text-gray-900 dark:text-white relative z-10 overflow-x-hidden">
-
-
-<section className="relative flex flex-col items-center justify-center text-center px-6 py-24 bg-white/70 dark:bg-black/70 overflow-hidden">
-
+    <main className="bg-transparent text-gray-900 dark:text-white relative z-10 overflow-x-hidden">
+      <section className="relative flex flex-col items-center justify-center text-center px-6 py-24 bg-white/70 dark:bg-black/70 overflow-hidden">
         <motion.h1
           initial={{ opacity: 0, y: -40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false, amount: 0.3 }}
           transition={{ duration: 0.6 }}
-          className="text-4xl md:text-5xl font-extrabold z-10 text-center mb-12"
-        >
+          className="text-4xl md:text-5xl font-extrabold z-10 text-center mb-12">
           Formulir Prediksi Gangguan Tidur
         </motion.h1>
 
@@ -144,11 +182,20 @@ export default function PredictPage() {
                         </FormControl>
                         <SelectContent>
                           {[
-                            "Engineer", "Teacher", "Doctor", "Nurse",
-                            "Scientist", "Software Engineer", "Salesperson",
-                            "Sales Representative", "Lawyer", "Accountant",
+                            "Engineer",
+                            "Teacher",
+                            "Doctor",
+                            "Nurse",
+                            "Scientist",
+                            "Software Engineer",
+                            "Salesperson",
+                            "Sales Representative",
+                            "Lawyer",
+                            "Accountant",
                           ].map((job) => (
-                            <SelectItem key={job} value={job}>{job}</SelectItem>
+                            <SelectItem key={job} value={job}>
+                              {job}
+                            </SelectItem>
                           ))}
                         </SelectContent>
                       </Select>
@@ -170,7 +217,9 @@ export default function PredictPage() {
                         </FormControl>
                         <SelectContent>
                           <SelectItem value="Normal">Normal</SelectItem>
-                          <SelectItem value="Normal Weight">Normal Weight</SelectItem>
+                          <SelectItem value="Normal Weight">
+                            Normal Weight
+                          </SelectItem>
                           <SelectItem value="Overweight">Overweight</SelectItem>
                           <SelectItem value="Obese">Obese</SelectItem>
                         </SelectContent>
@@ -186,9 +235,8 @@ export default function PredictPage() {
                   size="lg"
                   disabled={loading}
                   className="bg-white text-gray-700 border border-gray-300 hover:scale-105 hover:bg-gray-200 
-  dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 
-  font-semibold px-8 py-6 text-lg rounded-xl shadow-lg transition-transform"
-                >
+                  dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 
+                  font-semibold px-8 py-6 text-lg rounded-xl shadow-lg transition-transform">
                   {loading ? "Memproses..." : "Prediksi Sekarang"}
                 </Button>
               </div>
@@ -199,12 +247,54 @@ export default function PredictPage() {
                     <p className="text-red-600">{result.error}</p>
                   ) : (
                     <>
-                      <p className="text-lg font-semibold">
-                        Status: <span>{result.label}</span>
+                      <p className="text-xl font-bold mb-4">
+                        🎯 Hasil prediksi Anda adalah:{" "}
+                        <span className="text-indigo-600 dark:text-indigo-400">
+                          {result.label}
+                        </span>
                       </p>
-                      <p className="text-sm opacity-80">
-                        Probabilitas: {result.probability ? (result.probability * 100).toFixed(2) + "%" : "N/A"}
+                      <p className="text-sm opacity-80 mb-6">
+                        Probabilitas model:{" "}
+                        <span className="font-semibold">
+                          {(result.probability * 100).toFixed(2)}%
+                        </span>
                       </p>
+
+                      <div className="p-4 border rounded-lg bg-indigo-50 dark:bg-gray-800 dark:border-gray-700 text-sm text-gray-700 dark:text-gray-200 mb-6">
+                        {explanations[result.label] ||
+                          "Tidak ada keterangan tambahan untuk hasil ini."}
+                      </div>
+
+                      <div className="w-full h-64">
+                        <ResponsiveContainer width="100%" height="100%">
+                          <PieChart>
+                            <Pie
+                              data={[
+                                {
+                                  name: result.label,
+                                  value: result.probability,
+                                },
+                                {
+                                  name: "Lainnya",
+                                  value: 1 - result.probability,
+                                },
+                              ]}
+                              dataKey="value"
+                              nameKey="name"
+                              cx="50%"
+                              cy="50%"
+                              outerRadius={100}
+                              fill="#4F46E5"
+                              label>
+                              <Cell fill="#4F46E5" />
+                              <Cell fill="#E5E7EB" />
+                            </Pie>
+                            <Tooltip
+                              formatter={(val) => `${(val * 100).toFixed(2)}%`}
+                            />
+                          </PieChart>
+                        </ResponsiveContainer>
+                      </div>
                     </>
                   )}
                 </div>

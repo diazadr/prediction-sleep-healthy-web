@@ -6,18 +6,13 @@ RUN apt-get update && apt-get install -y \
     libgomp1 \
     && rm -rf /var/lib/apt/lists/*
 
-# Set working dir
 WORKDIR /app
 
-# Copy requirements
 COPY requirements.txt .
 
-# Install python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy source code + .env
 COPY ./app ./app
 COPY .env .env
 
-# Jalankan FastAPI via uvicorn
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]

@@ -52,6 +52,6 @@ export default function StarsCanvas() {
 
 // Rotasi cepat pas (delta / 10 & delta / 15).
 
-// Ukuran titik 0.002 → bener-bener kayak bintang.
+// Ukuran titik 0.002 → kayak bintang.
 
-// Kamera dekat ([0, 0, 1]) → bikin bintang kelihatan penuh layar.
+// Kamera dekat ([0, 0, 1]) →  bintang kelihatan penuh layar.

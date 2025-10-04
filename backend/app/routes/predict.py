@@ -33,7 +33,6 @@ except Exception as e:
     raise RuntimeError(f"Gagal load model dari {MODEL_PATH}: {e}")
 
 
-# Endpointnya
 @router.post("/predict", response_model=PredictionResult, dependencies=[Depends(verify_api_key)])
 def predict(input: SleepInput):
     try:

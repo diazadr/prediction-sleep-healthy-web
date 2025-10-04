@@ -7,6 +7,19 @@ import { Sun, Moon } from "lucide-react";
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return (
+      <Button variant="outline" size="icon" disabled>
+        <div className="h-[1.2rem] w-[1.2rem] opacity-0" />
+      </Button>
+    );
+  }
 
   return (
     <Button

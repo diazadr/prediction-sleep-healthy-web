@@ -5,9 +5,11 @@ from app.main import app
 
 client = TestClient(app)
 
+API_KEY = "apikeysleep"
+HEADERS = {"x-api-key": API_KEY}
 
 def test_health():
-    response = client.get("/health")
+    response = client.get("/health", headers=HEADERS)
     assert response.status_code == 200
     assert response.json() == {"status": "ok"}
 
@@ -27,7 +29,7 @@ def test_predict_valid():
         "pekerjaan": "Engineer",
         "kategori_bmi": "Normal"
     }
-    response = client.post("/predict", json=payload)
+    response = client.post("/predict", json=payload, headers=HEADERS)
     assert response.status_code == 200
     data = response.json()
     assert "gangguan_tidur" in data
@@ -50,5 +52,5 @@ def test_predict_invalid():
         "pekerjaan": "Teacher",
         "kategori_bmi": "Overweight"
     }
-    response = client.post("/predict", json=payload)
+    response = client.post("/predict", json=payload, headers=HEADERS)
     assert response.status_code == 422

@@ -23,7 +23,7 @@ const [positions] = useState(() =>
       <Points ref={ref} positions={positions} stride={3} frustumCulled>
         <PointMaterial
           transparent
-          color="#000000"   // 🔹 titik hitam untuk light mode
+          color="#000000"
           size={0.003}
           sizeAttenuation={true}
           depthWrite={false}

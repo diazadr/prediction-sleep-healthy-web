@@ -24,8 +24,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="id" suppressHydrationWarning className="scroll-smooth">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} min-h-screen antialiased`}
-      >
+        className={`${geistSans.variable} ${geistMono.variable} antialiased grid grid-rows-[auto_1fr_auto] min-h-screen`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <BackgroundWrapper />
           <Navbar />

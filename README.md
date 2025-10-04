@@ -138,7 +138,7 @@ Backend accessible at: `http://localhost:8000`
 
 Contributions are welcome! Fork, submit issues, or open pull requests.
 
-Special thanks to **Bayu Putra Pamungkas** for model support.
+Thanks to **Bayu Putra Pamungkas** for model support.
 
 ---
 

@@ -120,6 +120,17 @@ Dataset used: [Sleep Health and Lifestyle Dataset](https://www.kaggle.com/datase
 
 ---
 
+### Testing (pytest)
+
+1. Navigate to backend folder:
+
+   ```bash
+   cd backend
+   pytest
+   ```
+
+---
+
 ## Docker Setup
 
 ### Backend
@@ -135,15 +146,19 @@ docker run -d -p 8000:8000 --name project-ml-backend project-ml-backend
 
 Backend will be accessible at `http://localhost:8000`.
 
+---
+
 ## Project Status
 
-This project is **in development** and may be updated with new features and improvements.
+This project is **completed** and may be updated with new features and improvements.
 
 ---
 
 ## Contributions
 
 Contributions are welcome! Feel free to fork the repository, submit issues, or open pull requests.
+
+Thanks to **Bayu Putra Pamungkas** for support with the model.
 
 ---
 

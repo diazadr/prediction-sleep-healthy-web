@@ -1,6 +1,6 @@
 # Sleep Disorder Prediction Platform
 
-![Project Status](https://img.shields.io/badge/status-in%20development-yellow) [![License](https://img.shields.io/badge/license-MIT-blue)](./LICENSE)
+![Project Status](https://img.shields.io/badge/status-completed-brightgreen) [![License](https://img.shields.io/badge/license-MIT-blue)](./LICENSE)
 
 This project is a **machine learning-powered web application** that predicts potential sleep disorders based on lifestyle and health data. The system integrates a **Next.js frontend** with a **FastAPI backend** to provide an interactive, real-time prediction service.
 

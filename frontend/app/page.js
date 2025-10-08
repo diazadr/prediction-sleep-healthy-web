@@ -29,7 +29,7 @@ export default function LandingPage() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="text-4xl md:text-6xl font-extrabold z-10">
-          Student Admission Predictor
+          Sleep Health Admission Predictor
         </motion.h1>
 
         <motion.p
@@ -37,8 +37,8 @@ export default function LandingPage() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="mt-6 text-lg md:text-xl max-w-2xl z-10 text-gray-700 dark:text-gray-300">
-          Prediksi peluang diterima kuliah berdasarkan nilai akademik,
-          kehadiran, dan aktivitas dengan teknologi AI & Machine Learning.
+          Prediksi jenis kesehatan tidur berdasarkan aktivitas sehari hari dan
+          kesehatan, dengan teknologi AI & Machine Learning .
         </motion.p>
 
         <motion.div

@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Student Admission Predictor",
-  description: "Prediksi diterima / ditolak dengan FastAPI + Next.js",
+  title: "Sleep Health Admission Protector",
+  description: "Prediksi jenis kesehatan tidur dengan FastAPI + Next.js",
 };
 
 export default function RootLayout({ children }) {
